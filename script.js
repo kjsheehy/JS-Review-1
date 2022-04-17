@@ -14,8 +14,8 @@ console.log(document.querySelector('.guess').value);
 */
 
 //Generate secret # 1-20
-let number = Math.ceil(Math.random() * 20);
-document.querySelector('.number').textContent = number;
+let secretNumber = Math.ceil(Math.random() * 20);
+//document.querySelector('.number').textContent = secretNumber;
 
 document.addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
@@ -23,5 +23,11 @@ document.addEventListener('click', function () {
 
   if (!guess) {
     document.querySelector('.message').textContent = '⛔️ No number guessed';
+  } else if (guess === secretNumber) {
+    document.querySelector('.message').textContent = '🎉 Correct number!';
+  } else if (guess > secretNumber) {
+    document.querySelector('.message').textContent = '📈 Too high!';
+  } else if (guess < secretNumber) {
+    document.querySelector('.message').textContent = '📉 Too low!';
   }
 });
