@@ -17,7 +17,11 @@ console.log(document.querySelector('.guess').value);
 let secretNumber = Math.ceil(Math.random() * 20);
 //document.querySelector('.number').textContent = secretNumber;
 
-document.addEventListener('click', function () {
+//Initialize score to 20
+let score = 20;
+document.querySelector('.score').textContent = score;
+
+document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   console.log(guess, typeof guess);
 
@@ -26,8 +30,20 @@ document.addEventListener('click', function () {
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = '🎉 Correct number!';
   } else if (guess > secretNumber) {
-    document.querySelector('.message').textContent = '📈 Too high!';
+    if (score > 0) {
+      document.querySelector('.message').textContent = '📈 Too high!';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent = '💥 You lost the game!';
+    }
   } else if (guess < secretNumber) {
-    document.querySelector('.message').textContent = '📉 Too low!';
+    if (score > 0) {
+      document.querySelector('.message').textContent = '📉 Too low!';
+      score--;
+      document.querySelector('.score').textContent = score;
+    } else {
+      document.querySelector('.message').textContent = '💥 You lost the game!';
+    }
   }
 });
